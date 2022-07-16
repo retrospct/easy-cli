@@ -6,7 +6,7 @@ import (
 	"os"
 	"time"
 
-	"easy-cli/client"
+	"github.com/retrospct/easy-cli/client"
 
 	"github.com/charmbracelet/bubbles/spinner"
 	"github.com/charmbracelet/bubbles/textinput"
@@ -123,8 +123,8 @@ func (m model) View() string {
 func shorten(url string) (string, error) {
 	// Create a new client with the default BaseURL
 	client, err := client.New(
-		client.Environment("production"),
-		client.WithAuth(os.Getenv("SHORTEN_API_KEY")),
+		client.Environment("staging"),
+		// client.WithAuth(os.Getenv("ena_oJjjQjCBiWM4ZxOSDmlUJmnG613kTEmdDHB")),
 	)
 	if err != nil {
 			panic(err)
@@ -141,16 +141,18 @@ func shorten(url string) (string, error) {
 	)
 	if err != nil {
 			// Check the error returned
-			if err, ok := err.(*client.APIError); ok {
-					switch err.Code {
-					case client.ErrUnauthenticated:
-							fmt.Println("SHORTEN_API_KEY was invalid, please check your environment")
-							os.Exit(1)
-					case client.ErrAlreadyExists:
-							fmt.Println("The URL you provided was already shortened")
-							os.Exit(0)
-					}
-			}
+			// if err, ok := err.(*client.APIError); ok {
+			// 		switch err.Code {
+					// case client.ErrUnauthenticated:
+					// 		fmt.Println("SHORTEN_API_KEY was invalid, please check your environment")
+					// 		os.Exit(1)
+					// case client.ErrAlreadyExists:
+					// 		fmt.Println("The URL you provided was already shortened")
+					// 		os.Exit(0)
+			// 		default:
+			// 				fmt.Println("An error occurred:", err.Code)
+			// 		}
+			// }
 			panic(err) // if here then something has gone wrong in an unexpected way
 	}
 
