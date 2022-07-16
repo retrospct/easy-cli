@@ -3,6 +3,7 @@ module github.com/retrospct/easy-cli
 go 1.18
 
 require (
+	github.com/atotto/clipboard v0.1.4 // indirect
 	github.com/charmbracelet/bubbles v0.13.0 // indirect
 	github.com/charmbracelet/bubbletea v0.22.0 // indirect
 	github.com/charmbracelet/lipgloss v0.5.0 // indirect
